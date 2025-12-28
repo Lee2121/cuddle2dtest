@@ -1,0 +1,3 @@
+[submodule "game/lib/cuddle2d"]
+	path = game/lib/cuddle2d
+	url = https://github.com/Lee2121/cuddle2d.git
