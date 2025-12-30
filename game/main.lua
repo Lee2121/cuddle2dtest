@@ -5,11 +5,11 @@ local PS4_BTN_ID_CIRCLE = 2
 local PS4_BTN_ID_SQUARE = 3
 local PS4_BTN_ID_Triangle = 4
 
-local JOYSTICK_DEADZONE = .1
+local JOYSTICK_DEADZONE = .2
 
 local InputContext_Test = {
-	move = InputAction_Vector2({ xaxis = { InputDef_KeyboardKey('a'), InputDef_KeyboardKey("left"), InputDef_KeyboardKey('d', InputMod_Invert()), InputDef_KeyboardKey("right", InputMod_Invert()), InputDef_GamepadAxis("leftx", InputMod_Deadzone(JOYSTICK_DEADZONE) ) },
-								 yaxis = { InputDef_KeyboardKey('w', InputMod_Invert()), InputDef_KeyboardKey("up", InputMod_Invert()), InputDef_KeyboardKey('s'), InputDef_KeyboardKey("down"), InputDef_GamepadAxis("lefty", InputMod_Deadzone(JOYSTICK_DEADZONE) ) },
+	move = InputAction_Vector2({ xaxis = { InputDef_KeyboardKey('a'), InputDef_KeyboardKey("left"), InputDef_KeyboardKey('d', InputMod_Invert()), InputDef_KeyboardKey("right", InputMod_Invert()), InputDef_GamepadAxis("leftx" ) },
+								 yaxis = { InputDef_KeyboardKey('w', InputMod_Invert()), InputDef_KeyboardKey("up", InputMod_Invert()), InputDef_KeyboardKey('s'), InputDef_KeyboardKey("down"), InputDef_GamepadAxis("lefty" ) },
 								 xyaxis = { InputDef_Touch() } } ),
 
 	jump = InputAction_Bool( { InputDef_KeyboardKey("space"), InputDef_GamepadButton(PS4_BTN_ID_SQUARE) } ),
@@ -41,7 +41,8 @@ function demoLogic:onJumpEnded(value)
 end
 
 function love.load()
-	PlayerManager:init()
+	local defaultConfig = { joystickDeadzone = JOYSTICK_DEADZONE}
+	PlayerManager:init(defaultConfig)
 	BindToCallback(PlayerManager.onPlayerConnectedCallbacks, demoLogic, demoLogic.onPlayerConnected)
 end
 
